@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyberpunk Dragon Cursor</title>
+<style>
+  body {
+    cursor: none;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: url('deserted-city.jpg') no-repeat center bottom;
+    background-size: cover;
+    background-color: #0a0a0a;
+  }
+
+  /* Dark overlay to enhance mood */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10, 10, 10, 0.75);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #dragon {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    pointer-events: none;
+    transition: transform 0.2s ease-out;
+    z-index: 10;
+  }
+
+  /* Fire breath - animated flame with flicker */
+ #fire {
+  position: fixed;
+  width: 50px;
+  height: 60px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9;
+  filter: drop-shadow(0 0 6px #ff4500);
+  transform-origin: center bottom;
+}
+
+.flame {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 50% 40% 40% / 70% 70% 60% 60%;
+  background: radial-gradient(circle at 50% 30%, #ffae00, #ff2a00 70%, transparent 80%);
+  animation: flicker 0.3s infinite alternate ease-in-out;
+  filter: drop-shadow(0 0 6px #ff4500);
+}
+
+.flame1 {
+  width: 50px;
+  height: 60px;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.flame2 {
+  width: 35px;
+  height: 45px;
+  left: 8px;
+  background: radial-gradient(circle at 50% 30%, #ffd600, #ff3d00 70%, transparent 80%);
+  animation-delay: 0.15s;
+}
+
+.flame3 {
+  width: 25px;
+  height: 35px;
+  left: 15px;
+  background: radial-gradient(circle at 50% 30%, #fff100, #ff4d00 70%, transparent 80%);
+  animation-delay: 0.3s;
+}
+
+@keyframes flicker {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px #ff4500);
+  }
+  100% {
+    transform: scale(1.15) translateY(-5px);
+    opacity: 0.7;
+    filter: drop-shadow(0 0 12px #ff6700);
+  }
+}
+
+
+  /* Blink animation for idle */
+  @keyframes blink {
+    0%, 20%, 40%, 60%, 80%, 100% { opacity: 1; }
+    10%, 30%, 50%, 70%, 90% { opacity: 0; }
+  }
+  #dragon.idle {
+    animation: blink 3s infinite;
+  }
+</style>
+</head>
+<body>
+
+<img src="dragon.png" id="dragon" alt="Cyberpunk Dragon" />
+<div id="fire">
+  <div class="flame flame1"></div>
+  <div class="flame flame2"></div>
+  <div class="flame flame3"></div>
+</div>
+
+<audio id="clickSound" src="click.mp3"></audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
